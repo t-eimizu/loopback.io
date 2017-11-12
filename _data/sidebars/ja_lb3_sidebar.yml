@@ -12,7 +12,7 @@ url: /doc/ja/lb3/index.html
 translated: true
 children:
 
-- title: インストール
+- title: 'インストール'
   url: Installation.html
   output: 'web, pdf'
   translated: true
@@ -33,7 +33,7 @@ children:
   output: 'web, pdf'
   translated: true
 
-- title: LoopBackの核となる概念
+- title: 'LoopBackの核となる概念'
   url: LoopBack-core-concepts.html
   output: 'web, pdf'
   translated: true
