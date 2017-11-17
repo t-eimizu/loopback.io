@@ -104,7 +104,7 @@ Properties are required unless otherwise designated.
         Excludes the given list of properties from the base model from being visible. Use this instead of the approach documented under 'Exclude properties from base model' section below.
        </td>
     </tr>
-    
+
     <tr>
       <td>forceId</td>
       <td>Boolean</td>
@@ -585,7 +585,7 @@ For example, to map a property to a column in an Oracle database table, use the 
 ## Exclude properties from base model
 
 By default, a model inherits all properties from the base. To exclude some base properties from being visible, you need to set `excludeBaseProperties = ['property-be-excluded-from-base-model']`.
-`excludeBaseProperties` is recommended approach over previous approach of setting the base property to 'null' or 'false'. 
+`excludeBaseProperties` is recommended approach over previous approach of setting the base property to 'null' or 'false'.
 
 For example,
 {% include code-caption.html content="common/models/customer.json" %}
@@ -612,7 +612,7 @@ Excludes 'id' property from the base model, "Model"
 ...
 ```
 
-Below way of excluding base properties by setting the base property to 'null' or 'false' is not recommended. Instead, use `excludeBaseProperties` as shown above. 
+Below way of excluding base properties by setting the base property to 'null' or 'false' is not recommended. Instead, use `excludeBaseProperties` as shown above.
 
 {% include code-caption.html content="common/models/customer.json" %}
 ```javascript
