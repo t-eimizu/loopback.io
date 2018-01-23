@@ -446,7 +446,7 @@ To explicitly specify a property as ID, set the `id` property of the option t
 * `false` (or any value that converts to false): the property is not an ID (default).
 * Positive number, such as 1 or 2: the property is the index of a composite ID.
 
-In database terms, ID properties are primary key column(s) are. Such properties are defined with the 'id' attribute set to true or a number as the position for a composite key.
+In database terms, ID properties are primary key column(s). Such properties are defined with the 'id' attribute set to true or a number as the position for a composite key.
 
 For example,
 
@@ -792,6 +792,11 @@ For example:
       <td>Boolean</td>
       <td>Does not fetch the data if the relation is used in an include statement</td>
     </tr>
+    <tr>
+      <td>options.http.path</td>
+      <td>string</td>
+      <td>Set the relation http path</td>
+    </tr>
   </tbody>
 </table>
 
@@ -973,7 +978,7 @@ For example:
 }
 ```
 
-Now, any CRUD operation with a query parameter runs in the default scope will be applied; for example, assuming the above scope, a find opearation such as
+Now, any CRUD operation with a query parameter runs in the default scope will be applied; for example, assuming the above scope, a find operation such as
 
 ```javascript
 Product.find({offset: 0}, cb);
@@ -1131,7 +1136,7 @@ For MySQL, you can declare multi-column indexes as follows (for example):
 "indexes":
 {
     "UNIQUE_INDEX":  {
-        "columns": "column1,column2,...",
+        "columns": "`column1`,`column2`,...",
         "kind": "unique"
     }
 },
