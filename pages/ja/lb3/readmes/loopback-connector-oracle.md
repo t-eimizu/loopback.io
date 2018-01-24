@@ -1,36 +1,37 @@
 # loopback-connector-oracle
 
-[Oracle](https://www.oracle.com/database/index.html) is an object-relational database management system produced by Oracle Corporation. The `loopback-connector-oracle` module is the Oracle connector for the LoopBack framework based on the [node-oracledb](https://github.com/oracle/node-oracledb) module.
+[Oracle](https://www.oracle.com/database/index.html)は、Oracle社によって開発されたリレーショナル・データベースです。`loopback-connector-oracle` モジュールは、[node-oracledb](https://github.com/oracle/node-oracledb) に基づくLoopBackフレームワークのための Oracle コネクタです。
 
 <div class="gh-only">
 For more information, see the <a href="http://loopback.io/doc/ja/lb3/Oracle-connector.html)">LoopBack documentation</a>.
 </div>
 
-## Prerequisites
+## 前提条件
 
-**Node.js**: The Oracle connector requires Node.js version 4.x or 6.x.  
+**Node.js**: Oracle コネクタは、Node.js バージョン 4.x または 6.x が必要です。
 
-**Windows**: On 32-bit Windows systems, you must use the 32-bit version of Node.js.  On 64-bit Windows systems, you must use the 64-bit version of Node.js.  For more information, see [Node-oracledb Installation on Windows](https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#-7-node-oracledb-installation-on-windows).
+**Windows**: 32bit版のWindowsでは、32bit版のNode.jsを使用しなければなりません。64bit版のWindowsでは、64bit版のNode.jsを使用しなければなりません。詳細は、
+ [Node-oracledb Installation on Windows](https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#-7-node-oracledb-installation-on-windows) を参照してください。
 
-**Oracle**: The Oracle connector requires Oracle client libraries 11.2+ and can connect to Oracle Database Server 9.2+.
+**Oracle**: Oracleコネクタは、Oracleクライアントライブラリ 11.2以上が必要です。また、Oracle データベースサーバ 9.2以上に接続できます。
 
-## Installation
+## インストール
 
-In your application root directory, enter this command to install the connector:
+アプリケーションの最上位ディレクトリで、以下のコマンドを実行してコネクタをインストールします。
 
 ```shell
 $ npm install loopback-connector-oracle --save
 ```
 
-If you create a Oracle data source using the data source generator as described below, you don’t have to do this, since the generator will run npm install for you.
+以下で説明するようにデータソース生成ツールを使用してOracleデータソースを作成する場合、生成ツールは npm install を実行するので、これを行う必要はありません。
 
-See [Installing the Oracle connector](http://loopback.io/doc/ja/lb3/Installing-the-Oracle-connector.html) for further installation instructions.
+インストールに関する詳細な手引きは [Installing the Oracle connector](http://loopback.io/doc/ja/lb3/Installing-the-Oracle-connector.html) を参照してください。
 
-To simplify the installation of [node-oracledb](https://github.com/oracle/node-oracledb) module and Oracle instant clients, use [loopback-oracle-installer](https://github.com/strongloop/loopback-oracle-installer) as a dependency to install and configure `node-oracledb` (oracledb) upon `npm install`.
+[node-oracledb](https://github.com/oracle/node-oracledb) モジュールと Oracleインスタントクライアントのインストールを単純にするためには、npm install を実行する時に、依存関係として [loopback-oracle-installer](https://github.com/strongloop/loopback-oracle-installer) を使用して `node-oracledb` (oracledb) をインストール・構成します。
 
-Use the `config.oracleUrl` property to define the base URL to download the corresponding node-oracle (oracledb) bundle for the local environment.
+`config.oracleUrl`プロパティを使って、ローカル環境に対応するnode-oracle（oracledb）バンドルをダウンロードするためのベースURLを定義します。
 
-The bundle file name is `loopback-oracle-<platform>-<arch>-<version>.tar.gz`. The `version` is the same as the `version` in package.json.
+バンドルファイル名は、`loopback-oracle-<platform>-<arch>-<version>.tar.gz` です。`version` は package.json における `version` と同じです。
 
 ```javascript
   "dependencies": {
@@ -43,29 +44,30 @@ The bundle file name is `loopback-oracle-<platform>-<arch>-<version>.tar.gz`. Th
   ...
 ```
 
-You can override the `oracleUrl` setting with the LOOPBACK_ORACLE_URL environment variable.
+`oracleUrl`は、LOOPBACK_ORACLE_URL 環境変数をセットすることで上書き可能です。
 
-For example, the full URL for v1.5.0 for MacOSX is:
+例えば、MacOSX用の v1.5.0 の完全なURLは以下のとおりです。
 
 http://7e9918db41dd01dbf98e-ec15952f71452bc0809d79c86f5751b6.r22.cf1.rackcdn.com/loopback-oracle-MacOSX-x64-1.5.0.tar.gz
 
-The `libaio` library is required on Linux systems:
+Linux では、`libaoi` ライブラリが必要です。
 
-On Ubuntu/Debian, get it with this command:
+Ubuntu/Debian では、以下のコマンドでインストールできます。
 
 ```
 sudo apt-get install libaio1
 ```
 
-On Fedora/CentOS/RHEL, get it with this command:
+Fedora/CentOS/RHEL では、以下のコマンドでインストールできます。
 
 ```
 sudo yum install libaio
 ```
 
-## Creating an Oracle data source
+## Oracle データソースを作成する
 
 Use the [Data source generator](http://loopback.io/doc/ja/lb3/Data-source-generator.html) to add a Oracle data source to your application.  
+
 The generator will prompt for the database server hostname, port, and other settings
 required to connect to a Oracle database.  It will also run the `npm install` command above for you.
 
@@ -87,7 +89,7 @@ The entry in the application's `/server/datasources.json` will look like this:
 
 Edit `datasources.json` to add any other additional properties that you require.
 
-## Connector properties
+## コネクタのプロパティ
 
 The connector properties depend on [naming methods](http://docs.oracle.com/cd/E11882_01/network.112/e10836/naming.htm#NETAG008) you use for the Oracle database.
 LoopBack supports three naming methods:
@@ -96,7 +98,7 @@ LoopBack supports three naming methods:
 * Local naming (TNS): alias to a full connection string that can specify all the attributes that Oracle supports.
 * Directory naming (LDAP): directory for looking up the full connection string that can specify all the attributes that Oracle supports.
 
-### Easy Connect
+### 簡単な接続
 
 Easy Connect is the simplest form that provides out-of-the-box TCP/IP connectivity to databases.
 The data source then has the following settings.
@@ -160,7 +162,7 @@ For example:
 }
 ```
 
-### Local and directory naming
+### ローカルまたはディレクトリネーミング
 
 Both local and directory naming require that you place configuration files in a TNS admin directory, such as `/oracle/admin`.
 
@@ -172,7 +174,7 @@ This specifies the supported naming methods; for example:
 NAMES.DIRECTORY_PATH=(LDAP,TNSNAMES,EZCONNECT)
 ```
 
-**nsnames.ora**
+**tnsnames.ora**
 
 This maps aliases to connection stringsl for example:
 
@@ -190,7 +192,7 @@ DEFAULT_ADMIN_CONTEXT="dc=strongloop,dc=com"
 DIRECTORY_SERVER_TYPE=OID
 ```
 
-#### Set up TNS_ADMIN environment variable
+#### TNS_ADMIN 環境変数の設定
 
 For the Oracle connector to pick up the configurations, you must set the environment variable 'TNS_ADMIN' to the directory containing the `.ora` files.
 
@@ -208,7 +210,7 @@ var ds = loopback.createDataSource({
 });
 ```
 
-### Connection pooling options
+### コネクションプーリングオプション
 
 <table>
   <thead>
@@ -265,7 +267,7 @@ For example,
 }
 ```
 
-### Connection troubleshooting
+### 接続のトラブルシューティング
 
 If you encounter this error:
 
@@ -301,7 +303,7 @@ $ node examples/app.js
 
 For more information, see [StackOverflow question](http://stackoverflow.com/questions/10484231/ora-24408-could-not-generate-unique-server-group-name).
 
-## Model properties
+## モデルプロパティ
 
 An Oracle model definition consists of the following properties:
 
@@ -371,11 +373,11 @@ An Oracle model definition consists of the following properties:
   }
 ```
 
-## Type mapping
+## 型の対応関係
 
 See [LoopBack types](http://loopback.io/doc/ja/lb3/LoopBack-types.html) for details on LoopBack's data types.
 
-### JSON to Oracle Types
+### JSON から Oracle の型
 
 <table>
   <thead>
@@ -410,7 +412,7 @@ See [LoopBack types](http://loopback.io/doc/ja/lb3/LoopBack-types.html) for de
   </tbody>
 </table>
 
-### Oracle Types to JSON
+### Oracle の型から JSON
 
 <table>
   <thead>
