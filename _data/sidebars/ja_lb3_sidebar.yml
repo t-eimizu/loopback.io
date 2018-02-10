@@ -39,7 +39,7 @@ children:
   translated: true
   children:
 
-  - title: Routing
+  - title: ルーティング
     url: Routing.html
     output: 'web, pdf'
     translated: true
@@ -49,7 +49,7 @@ children:
     output: 'web, pdf'
     translated: true
 
-  - title: 'Glossary'
+  - title: '用語集'
     url: Glossary.html
     output: 'web, pdf'
     translated: true
