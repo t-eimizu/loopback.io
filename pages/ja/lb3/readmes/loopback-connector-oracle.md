@@ -50,7 +50,7 @@ $ npm install loopback-connector-oracle --save
 
 http://7e9918db41dd01dbf98e-ec15952f71452bc0809d79c86f5751b6.r22.cf1.rackcdn.com/loopback-oracle-MacOSX-x64-1.5.0.tar.gz
 
-Linux では、`libaoi` ライブラリが必要です。
+Linux では、`libaio` ライブラリが必要です。
 
 Ubuntu/Debian では、以下のコマンドでインストールできます。
 
@@ -66,12 +66,12 @@ sudo yum install libaio
 
 ## Oracle データソースを作成する
 
-Use the [Data source generator](http://loopback.io/doc/ja/lb3/Data-source-generator.html) to add a Oracle data source to your application.  
+Oracle データソースをアプリケーションに追加するには、[データソース生成ツール](http://loopback.io/doc/ja/lb3/Data-source-generator.html)を使用します。
 
-The generator will prompt for the database server hostname, port, and other settings
-required to connect to a Oracle database.  It will also run the `npm install` command above for you.
+生成ツールは、Oracleデータベースに接続する上で必要なデータベースサーバのホスト名・ポート番号・その他の設定を尋ねます。
+その際、上記の`npm install`コマンドも実行します。
 
-The entry in the application's `/server/datasources.json` will look like this:
+アプリケーションの `/server/datasources.json` への入力は以下のようになります。
 
 {% include code-caption.html content="/server/datasources.json" %}
 ```javascript
@@ -87,66 +87,66 @@ The entry in the application's `/server/datasources.json` will look like this:
  }
 ```
 
-Edit `datasources.json` to add any other additional properties that you require.
+追加のプロパティが必要な場合は、`datasources.json` を編集して追加します。
 
 ## コネクタのプロパティ
 
-The connector properties depend on [naming methods](http://docs.oracle.com/cd/E11882_01/network.112/e10836/naming.htm#NETAG008) you use for the Oracle database.
-LoopBack supports three naming methods:
+コネクタプロパティは、Oracle データベースを参照するための[ネーミングメソッド](http://docs.oracle.com/cd/E11882_01/network.112/e10836/naming.htm#NETAG008) に依ります。
+LoopBack は3種類のネーミングメソッドが使用できます。
 
-* Easy connect: host/port/database.
-* Local naming (TNS): alias to a full connection string that can specify all the attributes that Oracle supports.
-* Directory naming (LDAP): directory for looking up the full connection string that can specify all the attributes that Oracle supports.
+* 簡易接続： ホスト名／ポート番号／データベース名
+* ローカルネーミング（TNS）： Oracleがサポートする全ての属性を指定できる、完全な接続文字列の別名
+* ディレクトリネーミング（LDAP）：Oracleがサポートする全ての属性を指定できる、完全な接続文字列を探すためのディレクトリ
 
-### 簡単な接続
+### 簡易接続
 
-Easy Connect is the simplest form that provides out-of-the-box TCP/IP connectivity to databases.
-The data source then has the following settings.
+簡易接続は、TCP/IPでデータベースにすぐ接続できる最もシンプルな形式です。
+この場合、データソースには以下の設定があります。
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
+      <th>プロパティ</th>
+      <th>型</th>
+      <th>既定値</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>    
     <tr>
-      <td>host or hostname</td>
+      <td>host または hostname</td>
       <td>String</td>
       <td>localhost</td>
-      <td>Host name or IP address of the Oracle database server</td>
+      <td>Oracleデータベースサーバのホスト名またはIPアドレス</td>
     </tr>
     <tr>
       <td>port</td>
       <td>Number</td>
       <td>1521</td>
-      <td>Port number of the Oracle database server</td>
+      <td>Oracleデータベースサーバのポート番号</td>
     </tr>
     <tr>
-      <td>username or user</td>
+      <td>username または user</td>
       <td>String</td>
       <td>&nbsp;</td>
-      <td>User name to connect to the Oracle database server</td>
+      <td>Oracleデータベースサーバに接続するユーザ名</td>
     </tr>
     <tr>
       <td>password</td>
       <td>String</td>
       <td>&nbsp;</td>
-      <td>Password to connect to the Oracle database server</td>
+      <td>Oracleデータベースサーバに接続するパスワード</td>
     </tr>
     <tr>
       <td>database</td>
       <td>String</td>
       <td>XE</td>
-      <td>Oracle database listener name</td>
+      <td>Oracleデータベースのリスナー名</td>
     </tr>
   </tbody>
 </table>
 
-For example:
+例えば、以下のようになります。
 
 {% include code-caption.html content="/server/datasources.json" %}
 ```javascript
@@ -164,11 +164,11 @@ For example:
 
 ### ローカルまたはディレクトリネーミング
 
-Both local and directory naming require that you place configuration files in a TNS admin directory, such as `/oracle/admin`.
+ローカルとディレクトリネーミングは、両方共以下の設定ファイルを `/oracle/admin` のようなTNS adminディレクトリに配置する必要があります。
 
 **sqlnet.ora**
 
-This specifies the supported naming methods; for example:
+このファイルでは使用できるネーミングメソッドを指定します。例えば以下ようなものです。
 
 ```
 NAMES.DIRECTORY_PATH=(LDAP,TNSNAMES,EZCONNECT)
@@ -176,7 +176,7 @@ NAMES.DIRECTORY_PATH=(LDAP,TNSNAMES,EZCONNECT)
 
 **tnsnames.ora**
 
-This maps aliases to connection stringsl for example:
+このファイルでは、接続文字列の別名を設定します。例えば以下のようなものです。
 
 ```
 demo1=(DESCRIPTION=(CONNECT_DATA=(SERVICE_NAME=))(ADDRESS=(PROTOCOL=TCP)(HOST=demo.strongloop.com)(PORT=1521)))
@@ -184,7 +184,7 @@ demo1=(DESCRIPTION=(CONNECT_DATA=(SERVICE_NAME=))(ADDRESS=(PROTOCOL=TCP)(HOST=de
 
 **ldap.ora**
 
-This configures the LDAP server.
+このファイルでは、LDAPサーバを設定します。
 
 ```
 DIRECTORY_SERVERS=(localhost:1389)
@@ -194,17 +194,17 @@ DIRECTORY_SERVER_TYPE=OID
 
 #### TNS_ADMIN 環境変数の設定
 
-For the Oracle connector to pick up the configurations, you must set the environment variable 'TNS_ADMIN' to the directory containing the `.ora` files.
+Oracleコネクタが設定を見つけるためには、'TNS_ADMIN'環境変数が`.ora`ファイルを含むディレクトリを指すようにセットしなければなりません。
 
 ```
-export TNS_ADMIN=<directory containing .ora files>
+export TNS_ADMIN=< .ora ファイルを含むディレクトリ>
 ```
 
-Now you can use either the TNS alias or LDAP service name to configure a data source:
+これで、データソースを設定するためにTNSエイリアスとLDAPサービス名の両方を使用できます。
 
 ```javascript
 var ds = loopback.createDataSource({
-  "tns": "demo", // The tns property can be a tns name or LDAP service name
+  "tns": "demo", // tns プロパティは tns名またはLDAPサービス名のどちらでもよい
   "username": "demo",
   "password": "L00pBack"
 });
@@ -215,43 +215,41 @@ var ds = loopback.createDataSource({
 <table>
   <thead>
     <tr>
-      <th>Property name</th>
-      <th>Description</th>
-      <th>Default value</th>
+      <th>プロパティ名</th>
+      <th>説明</th>
+      <th>既定値</th>
     </tr>
   </thead>
   <tbody>    
     <tr>
       <td>minConn</td>
-      <td>Minimum number of connections in the connection pool</td>
+      <td>接続プールにある最小の接続数</td>
       <td>1</td>
     </tr>
     <tr>
       <td>maxConn</td>
-      <td>Maxmimum number of connections in the connection pool</td>
+      <td>接続プールにある最大の接続数</td>
       <td>10</td>
     </tr>
     <tr>
       <td>incrConn</td>
       <td>
-        <p>Incremental number of connections for the connection pool.</p>
+        <p>接続プールの接続を増やす際の増分値</p>
       </td>
       <td>1</td>
     </tr>
     <tr>
       <td>timeout</td>
       <td>
-        Time-out period in seconds for a connection in the connection pool.
-          The Oracle connector
-          will terminate connections in this
-          connection pool that are idle longer than the time-out period.
+        接続プールの接続がタイムアウトするまでの秒数
+          Oracle コネクタはアイドル時間がタイムアウト時間を過ぎると接続を終了します。
       </td>
       <td>10</td>
     </tr>
   </tbody>
 </table>
 
-For example,
+例えば、以下のようになります。
 
 {% include code-caption.html content="/server/datasources.json" %}
 ```javascript
@@ -269,25 +267,24 @@ For example,
 
 ### 接続のトラブルシューティング
 
-If you encounter this error:
+以下のようなエラーが表示された場合、
 
 ```
 Error: ORA-24408: could not generate unique server group name
 ```
 
-Then the Oracle 11g client requires an entry with your hostname pointing to
-`127.0.0.1`.
+Oracle 11g クライアントは、自身のホスト名が `127.0.0.1` を指すエントリが必要です。
 
-To resolve:
+解決策：
 
-Get your hostname. Check your hostname by running this command (for example, if your machine's name is "earth"):
+ホスト名を確認します。以下のコマンドを実行してください。（例えば、マシン名が「earth」だとします）
 
 ```
 $ hostname
 earth
 ```
 
-Update `/etc/hosts` and map `127.0.0.1` to your hostname "earth":
+`/etc/hosts` を更新して、`127.0.0.1` がホスト名「earth」を指すようにします。
 
 ```
 ...
@@ -295,21 +292,21 @@ Update `/etc/hosts` and map `127.0.0.1` to your hostname "earth":
 ...
 ```
 
-Verify the fix. Run the example in `examples/app.js`:
+修正を確認するために、`example/app.js` にある例を実行します。
 
 ```
 $ node examples/app.js
 ```
 
-For more information, see [StackOverflow question](http://stackoverflow.com/questions/10484231/ora-24408-could-not-generate-unique-server-group-name).
+詳しくは、[StackOverflow の質問](http://stackoverflow.com/questions/10484231/ora-24408-could-not-generate-unique-server-group-name) を参照してください。
 
 ## モデルプロパティ
 
-An Oracle model definition consists of the following properties:
+Oracle モデル定義は、以下のプロパティから構成されます。
 
-* `name`: Name of the model, by default, it's the camel case of the table.
-* `options`: Model-level operations and mapping to Oracle schema/table.
-* `properties`: Property definitions, including mapping to Oracle column.
+* `name`: モデルの名前。既定ではテーブルのキャメルケース。
+* `options`: モデルレベルのオプションや、Oracleのスキーマ・テーブルとの紐付け。
+* `properties`: Oracleの列との紐付けなどのプロパティ定義。
 
 {% include code-caption.html content="/common/models/model.json" %}
 ```javascript
@@ -375,22 +372,22 @@ An Oracle model definition consists of the following properties:
 
 ## 型の対応関係
 
-See [LoopBack types](http://loopback.io/doc/ja/lb3/LoopBack-types.html) for details on LoopBack's data types.
+LoopBackのデータ型に関する詳細は [LoopBack の型](http://loopback.io/doc/ja/lb3/LoopBack-types.html)を参照してください。
 
 ### JSON から Oracle の型
 
 <table>
   <thead>
     <tr>
-      <th>LoopBack Type</th>
-      <th>Oracle Type</th>
+      <th>LoopBack の型</th>
+      <th>Oracle の型</th>
     </tr>
   </thead>    
   <tbody>    
     <tr>
       <td>String<br>JSON<br>Text<br>default</td>
       <td>VARCHAR2
-      <br/>Default length is 1024
+      <br/>既定の長さは 1024
       </td>
     </tr>
     <tr>
@@ -432,7 +429,7 @@ See [LoopBack types](http://loopback.io/doc/ja/lb3/LoopBack-types.html) for de
     </tr>
     <tr>
       <td>LONG, BLOB, CLOB, NCLOB</td>
-      <td>Node.js <a class="external-link" href="http://nodejs.org/api/buffer.html">Buffer object</a></td>
+      <td>Node.js の<a class="external-link" href="http://nodejs.org/api/buffer.html">Buffer オブジェクト</a></td>
     </tr>
     <tr>
       <td>NUMBER<br>INTEGER<br>DECIMAL<br>DOUBLE<br>FLOAT<br>BIGINT<br>SMALLINT<br>REAL<br>NUMERIC<br>BINARY_FLOAT<br>BINARY_DOUBLE<br>UROWID<br>ROWID</td>
