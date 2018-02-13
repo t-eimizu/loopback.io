@@ -119,7 +119,7 @@ module.exports = {
   }
 ```
 
-{% include note.html content="[アプリケーション生成ツール](Application-generator.html) は上記の設定を持つ `middleware.developmnet.json` ファイルを作成します。
+{% include note.html content="[アプリケーション生成ツール](Application-generator.html) は上記の設定を持つ `middleware.development.json` ファイルを作成します。
 NODE_ENV環境変数が `development` でないことを確認すればOKです。
 " %}
 
