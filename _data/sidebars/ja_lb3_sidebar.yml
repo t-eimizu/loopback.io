@@ -65,37 +65,37 @@ children:
   translated: true
   children:
 
-  - title: 'Create a simple API'
+  - title: '単純なAPIの作成'
     url: Create-a-simple-API.html
     output: 'web, pdf'
     translated: true
 
-  - title: 'Use API Explorer'
+  - title: 'API Explorer を使う'
     url: Use-API-Explorer.html
     output: 'web, pdf'
     translated: true
 
-  - title: 'Connect your API to a data source'
+  - title: 'APIをデータソースに接続する'
     url: Connect-your-API-to-a-data-source.html
     output: 'web, pdf'
     translated: true
 
-  - title: 'Extend your API'
+  - title: 'APIを拡張する'
     url: Extend-your-API.html
     output: 'web, pdf'
     translated: true
 
-  - title: 'Add a static web page'
+  - title: '静的なWebページを追加する'
     url: Add-a-static-web-page.html
     output: 'web, pdf'
     translated: true
 
-  - title: 'Add a custom Express route'
+  - title: '独自の Express ルートを追加する'
     url: Add-a-custom-Express-route.html
     output: 'web, pdf'
     translated: true
 
-  - title: 'Next steps'
+  - title: '次のステップ'
     url: Next-steps.html
     output: 'web, pdf'
     translated: true

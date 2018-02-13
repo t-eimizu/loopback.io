@@ -47,11 +47,11 @@ LoopBackアプリケーション生成ツールは、フレンドリーなアス
    `---------´   |       application!       |
     ( _´U`_ )    '--------------------------'
     /___A___\
-     |  ~  |
+     |     |
    __'.___.'__
  ´   `  |° ´ Y `
-[?] What's the name of your application? loopback-getting-started
-[?] Enter name of the directory to contain the project: loopback-getting-started
+? アプリケーションの名前は何ですか? loopback-getting-started
+? プロジェクトを格納するディレクトリーの名前を入力してください: loopback-getting-started
 ```
 
 {% include note.html content="アプリケーションに別の名前を使うこともできます。そうする場合、チュートリアルの残りの部分を通して、\"loopback-getting-started\" を別の名前に置き換えてください。
@@ -59,22 +59,22 @@ LoopBackアプリケーション生成ツールは、フレンドリーなアス
 
 するとツールは、作成するアプリケーションの種類を尋ねます。
 
-If using `apic`:
+`lb` または `apic` の場合、
 
 ```
-? What kind of application do you have in mind? (Use arrow keys)
+? どのようなタイプのアプリケーションにしますか? (Use arrow keys)
 ❯ empty-server (An empty LoopBack API, without any configured models or datasources)
   hello-world (A project containing a controller, including a single vanilla Message and
     a single remote method)
   notes (A project containing a basic working example, including a memory database)
 ```
 
-Press **Enter** to accept the default selection, `empty server`.
+**Enter** を押下して、既定の選択である `empty server` （`lb` の場合は `api-server`）を受け入れます。
 
 If using `slc`:
 
 ```
-? What kind of application do you have in mind? (Use arrow keys)
+? どのようなタイプのアプリケーションにしますか? (Use arrow keys)
   api-server (A LoopBack API server with local User auth)
   empty-server (An empty LoopBack API, without any configured models or datasources)
 ❯ hello-world (A project containing a controller, including a single vanilla Message and
@@ -82,18 +82,18 @@ If using `slc`:
   notes (A project containing a basic working example, including a memory database)
 ```
 
-Arrow down and choose `hello-world`.
+矢印キーで `hello-world` を選択します。
 
-The generator will then display messages as it scaffolds the application including:
+生成ツールは、アプリケーションの土台を作りながら、以下のようなメッセージを表示します。
 
-1.  Initializing the [project folder structure](Project-layout-reference).
-2.  Creating default JSON files.
-3.  Creating default JavaScript files.
-4.  Downloading and installing dependent Node modules (as if you had manually done `npm install`).
+1.  [プロジェクトフォルダ構造](Project-layout-reference) の初期化。
+2.  既定のJSONファイルの作成。
+3.  既定のJavaScriptファイルの作成。
+4.  依存するNodeモジュールのダウンロードとインストール（手作業で`npm install`をしたのと同様）。
 
-## モデルを作成する。
+## モデルを作成する
 
-さて、最初のプロジェクトの土台ができあがりました。自動的にREST API エンドポイントが生成される _CoffeeShop_ モデルを作りましょう。
+さて、最初のプロジェクトの土台ができあがりました。自動的にREST API エンドポイントが生成される _CoffeeShop_ モデルを作りましょう。
 
 新しいアプリケーションのディレクトリに移動し、LoopBack [モデル生成ツール](Model-generator)を実行します。
 
@@ -111,15 +111,15 @@ StrongLoop ツールを使用している場合、
 $ lb model
 ```
 
-生成ツールがモデル名を尋ねてくるので、**CoffeeShop**~と入力します~。
+生成ツールがモデル名を尋ねてくるので、**CoffeeShop** と入力します 。
 
 ```
-[?] モデル名を入力します: CoffeeShop
+? モデル名を入力します: CoffeeShop
 ```
 
 すると、モデルを既に定義したデータソースに紐付けるかどうかを聞いてきます。
 
-この時点では、既定のインメモリデータソースのみが利用可能です。**Enter**~を押下して~選択します。
+この時点では、既定のインメモリデータソースのみが利用可能です。**Enter** を押下して 選択します。
 
 ```
 ...
@@ -127,10 +127,10 @@ $ lb model
 ❯ db (memory)
 ```
 
-次に生成ツールは、モデルに使用する基本クラスを尋ねます。ゆくゆくは、データベースにある永続的なデータソースにこのモデルを接続しますので、下矢印を押して**PersistedModel**を選んで、**Enter**を押下してください。
+次に生成ツールは、モデルに使用する基本クラスを尋ねます。ゆくゆくは、データベースにある永続的なデータソースにこのモデルを接続しますので、下矢印を押して **PersistedModel** を選んで、**Enter** を押下してください。
 
 ```
-[?] モデルの基本クラスを選択します (Use arrow keys)
+? モデルの基本クラスを選択します (Use arrow keys)
   Model
 ❯ PersistedModel
   ACL
@@ -140,44 +140,44 @@ $ lb model
   Checkpoint
 ```
 
-[PersistedModel ](http://apidocs.loopback.io/loopback/#persistedmodel)は、データベースのような永続的データソースに接続する全てのモデルの基本となるオブジェクトです。
+[PersistedModel ](http://apidocs.loopback.io/loopback/#persistedmodel)は、データベースのような永続的データソースに接続する全てのモデルの基本となるオブジェクトです。
 モデルの継承階層についての概要は[LoopBack の核となる概念](LoopBack-core-concepts)を参照してください。
 
 LoopBackの強力な優位性の一つが、モデルについて自動的に生成される REST API です。
 生成ツールは、REST APIを公開するかどうか質問します。
 
-再度**Enter**を押下し、既定値を受け入れて、CoffeeShopモデルをREST経由で公開します。
+再度 **Enter** を押下し、既定値を受け入れて、CoffeeShopモデルをREST経由で公開します。
 
 ```
-[?] REST API を介して CoffeeShop を公開しますか? (Y/n) Y
+? REST API を介して CoffeeShop を公開しますか? Y
 ```
 
-LoopBack automatically creates a REST route associated with your model using the _plural_ of the model name.  By default, it pluralizes the name for you (by adding "s"), but you can specify a custom plural form if you wish.  See [Exposing models over REST](Exposing-models-over-REST) for all the details.  
+LoopBackは自動的に、モデル名の _複数形_ を使って、モデルと紐付いたRESTのルートを作成します。既定では、名前を複数形に（"s"を追加）しますが、望むなら独自の複数形を指定することもできます。詳細は、[REST経由でモデルを公開する](Exposing-models-over-REST) を参照してください。
 
-Press **Enter** to accept the default plural form (CoffeeShops):
-
-```
-[?] Custom plural form (used to build REST URL):
-```
-
-Next, you'll be asked whether you want to create the model on the server only or in the `/common` directory, where it can potentially be used by both server and [client LoopBack APIs](LoopBack-in-the-client).  Keep, the default, common, even though in this application you'll only be working with server-side models:
+**Enter** を押下して、既定の複数形（CoffeeShops）を受け入れます。
 
 ```
-? Common model or server only?
-❯ common
-  server
+? カスタム複数形 (REST URL の作成に使用します):
 ```
 
-Every model has properties.  Right now, you're going to define one property, "name," for the CoffeeShop model.  
-
-Select **`string`** as the property type (press **Enter**, since string is the default choice):
+次に、モデルをサーバ限定に作成するか、サーバと[クライアントサイド LoopBack API](LoopBack-in-the-client) の両方で使用できる `/common` ディレクトリに作成するか質問されます。アプリケーションがサーバサイドのモデルしか使用しないとしても、既定の「共通」を保持しておきましょう。
 
 ```
-Let's add some CoffeeShop properties now.
-Enter an empty property name when done.
-[?] Property name: name
+? 共通モデルですか、あるいはサーバー専用ですか?
+❯ 共通
+  サーバー
+```
+
+どんなモデルにもプロパティがあります。それでは、CoffeeShop モデルに name というプロパティを定義しましょう。
+
+プロパティの型として、**`string`** を選びます。（stringは既定の選択しなので、**Enter** を押下します）
+
+```
+では、CoffeeShop プロパティーをいくつか追加しましょう。
+完了したら、空のプロパティー名を入力してください。
+? プロパティー名: name
    invoke   loopback:property
-[?] Property type: (Use arrow keys)
+? プロパティー・タイプ: (Use arrow keys)
 ❯ string
   number
   boolean
@@ -189,61 +189,61 @@ Enter an empty property name when done.
   (other)
 ```
 
-Each property can be optional or required. Enter **`y`** to make `name` required:
+それぞれのプロパティは、任意または必須にできます。**`y`** を入力して `name` を必須にします。
 
-`[?] Required? (y/N)`
+`? 必須 (y/N)`
 
-Then you'll be prompted to enter a default value for the property; press Enter for no default value:
+プロパティの既定値を入力するように求められます。Enterを押下して、既定値がない状態にします。
 
-`? Default value[leave blank for none]: `
+`? デフォルト値 [なしの場合は空白のまま]: `
 
-Then, you'll be prompted to add another property.  Follow the prompts to add a required property named "city."
+別のプロパティを追加するか質問されます。以下のように、"city" という必須のプロパティを追加します。
 
 ```
-Let's add another CoffeeShop property.
-? Property name: city
-? Property type: string
-? Required? Yes
-? Default value[leave blank for none]:
+別の CoffeeShop プロパティーを追加しましょう。
+? プロパティー名: city
+? プロパティー・タイプ: string
+? 必須 Yes
+? デフォルト値 [なしの場合は空白のまま]:
 ```
 
-End the model creation process by pressing **Enter** when prompted for the name of the next property.
+モデル作成処理を終えるには、次のプロパティの名前を聞かれている時に **Enter** を押下します。
 
-The model generator will create two files in the application's `common/models` directory that define the model: `coffee-shop.json` and `coffee-shop.js`.
+モデル生成ツールは、アプリケーションの `common/models` ディレクトリに、モデルを定義する`coffee-shop.json` と `coffee-shop.js` という２つのファイルを作成します。
 
-{% include note.html content="The LoopBack [model generator](Model-generator.html),automatically converts camel-case model names (for example MyModel) to lowercase dashed names (my-model).  For example, if you create a model named \"FooBar\" with the model generator, it creates files `foo-bar.json` and `foo-bar.js` in `common/models`.  However, the model name (\"FooBar\") will be preserved via the model's name property.
+{% include note.html content="LoopBack の [モデル生成ツール](Model-generator.html) は、モデル名をキャメルケース（MyModel）から、小文字をハイフンで繋いだ名前（my-model）に自動的に変換します。例えば、\"FooBar\" という名前のモデルをモデル生成ツールで作った場合、`common/models` に `foo-bar.json` と `foo-bar.js` というファイルが作られます。しかし、モデル名（\"FooBar\"）はモデルの name プロパティに保持されています。
 " %}
 
-## Check out the project structure
+## プロジェクトの構造を確認する
 
-For all the details of the canonical LoopBack application structure, see [Project layout reference](Project-layout-reference).
+標準的なLoopBack アプリケーションの構造についての詳細は、[プロジェクト構成のリファレンス](Project-layout-reference) を参照してください。
 
-## Run the application
+## アプリケーションを実行する
 
-Start the application:
+アプリケーションを開始します。
 
 ```
 $ node .
 ...
+Web server listening at: http://0.0.0.0:3000
 Browse your REST API at http://0.0.0.0:3000/explorer
-Web server listening at: http://0.0.0.0:3000/
 ```
 
-{% include note.html content="Running your app with the `node` command is appropriate when you're developing on your local machine.   In production, consider using [API Connect](https://developer.ibm.com/apiconnect/) or a [process manager](http://strong-pm.io/) for scalability and reliability.
+{% include note.html content="`node` コマンドでアプリケーションを実行するのは、ローカルマシンで開発する時に適した方法です。本番環境では、スケーラビリティや信頼性のために、 [API Connect](https://developer.ibm.com/apiconnect/) や [process manager](http://strong-pm.io/) を使うことを検討してください。
 " %}
 
-Open your browser to [http://0.0.0.0:3000/](http://0.0.0.0:3000/) (on some systems, you may need to use [http://localhost:3000](http://localhost:3000/) instead).  You'll see the default application response that displays some JSON with some status information; for example:
+ブラウザで [http://0.0.0.0:3000/](http://0.0.0.0:3000/)（システムによっては、代わりに [http://localhost:3000](http://localhost:3000/) を使う必要があるかもしれません）を開くと、以下のようなステータス情報を含む、既定のアプリケーションからの応答が表示されるでしょう。
 
 ```
 {"started":"2016-09-10T21:59:47.155Z","uptime":42.054}
 ```
 
-Now open your browser to [http://0.0.0.0:3000/explorer](http://0.0.0.0:3000/explorer) or [http://localhost:3000/explorer](http://localhost:3000/explorer).  You'll see the StrongLoop API Explorer:
+ブラウザで [http://0.0.0.0:3000/explorer](http://0.0.0.0:3000/explorer) または [http://localhost:3000/explorer](http://localhost:3000/explorer) を開いてください。StrongLoop API Explorerが表示されます。
 
 {% include image.html file="5570638.png" alt="" %}
 
-Through a set of simple steps using LoopBack, you've created a CoffeeShop model, specified its properties and then exposed it through REST. 
+LoopBackを使った単純なステップを通して、CoffeeShop モデルを作成し、そのプロパティを指定し、REST経由でそれらを公開しまいた。
 
 {% include next.html content= "
-In [Use API Explorer](Use-API-Explorer.html), you'll explore the REST API you just created in more depth and exercise some of its operations.
+[API Explorerを使う](Use-API-Explorer.html) では、今作成したREST API をより深く探索し、その操作について学習します。
 " %}

@@ -1,5 +1,5 @@
 ---
-title: "Use API Explorer"
+title: "API Explorer を使う"
 lang: ja
 layout: page
 toc: false
@@ -7,19 +7,19 @@ keywords: LoopBack
 tags: [getting_started]
 sidebar: ja_lb3_sidebar
 permalink: /doc/ja/lb3/Use-API-Explorer.html
-summary: LoopBack applications come with a built-in API Explorer you can use to test REST API operations during development.
+summary: LoopBack アプリケーションは、開発中にREST API をテストするために使える、組み込みの API Explorer を同梱しています。
 ---
 
 {% include content/ja/gs-prereqs.html %}
 
-You're not the only one who'll use the API you just created.  That means you'll need to document your API.  Fortunately, LoopBack provides API Explorer for you. 
+作成したAPIを使うのはあなただけではありません。ですから、APIをあなたが文書化する必要があります。幸運なことに、LoopBackは API Explorerを提供しています。
 
-{% include note.html content="If you followed [Create a simple API](Create-a-simple-API.html), keep that app running and skip down to [Run API Explorer](#run-api-explorer).
+{% include note.html content="[単純なAPIの作成](Create-a-simple-API.html) を済ませているなら、アプリケーションを実行したまま、[API Explorerの実行](#run-api-explorer) まで飛ばしてください。
 
-If you're just jumping in, follow the steps below to catch up...
+直接ここに来た場合、以下のステップを実行して追いついてください。
 " %}
 
-Get the app (in the state following the last article) from GitHub and install all its dependencies:
+（前の項目が終わった状態の）アプリケーションをGitHubから取得し、依存関係をインストールします。
 
 ```
 $ git clone https://github.com/strongloop/loopback-getting-started.git
@@ -28,68 +28,71 @@ $ git checkout step1
 $ npm install
 ```
 
-## Run API Explorer
+## API Explorerの実行
 
-Run the application:
+アプリケーションを実行します。
 
 `$ node .`
 
-Now go to [http://localhost:3000/explorer](http://localhost:3000/explorer).  You'll see the StrongLoop API Explorer showing the two models this application has: **Users** and **CoffeeShops:** 
+そして、[http://localhost:3000/explorer](http://localhost:3000/explorer) に行きます。StrongLoop API Explorer がアプリケーションの持つ２つのモデル **User** と **CoffeeShop** を表示するでしょう。
 
-{% include image.html file="5570639.png" alt="" %} 
+{% include image.html file="5570639.png" alt="" %}
 
-## About LoopBack built-in models
+## LoopBackの組み込みモデルについて
 
-In addition to the CoffeeShop model that you defined, by default Loopback generates the User model and its endpoints for every application.  
+自分で定義した CoffeeShop モデルに加えて、LoopBackは 既定で全てのアプリケーションに User モデルと、そのエンドポイントを生成します。
 
-LoopBack creates several other models for common use cases.  For more information, see
-[built-in models](Using-built-in-models) .
+LoopBack は、一般的なユースケースのために、その他にも幾つかのモデルを作成します。
+詳細は、[組み込みモデル](Using-built-in-models) を参照してください。
 
-## Exploring the CoffeeShop model
+## CoffeeShop モデルを探索する
 
-Right now, you're going to "drill down" on the CoffeeShop model. Click on **CoffeeShops** to show all its API endpoints:
+それでは、 CoffeeShop モデルを「掘り下げ」て行きましょう。**CoffeeShop** をクリックして、全てのAPIエンドポイントを表示します。
 
 {% include image.html file="5570640.png" alt="" %}
 
-Scan down the rows of the API endpoints: you can see that they cover all the normal create, read, update, and delete (CRUD) operations, and then some.
+APIエンドポイントの行を下まで見ていくと、一般的な作成・読取・更新・削除（CRUD）操作が全て網羅され、その他にも幾つか操作があることが分かるでしょう。
 
-Click on  **POST  /CoffeeShops **   **Create a new instance of the model and persist it into the data source **to expand that operation:
-
+**POST /CoffeeShops **   **Create a new instance of the model and persist it into the data source** をクリックして、操作を展開します。
 {% include image.html file="5570641.png" alt="" %}
 
-Follow the instructions in the diagram above.
+上の図のガイドに従ってください。
 
-Click in Model Schema to get a JSON "data template" that you can edit in the **data** field.  
+「Example Value」をクリックすると、JSONの「データテンプレート」が **data** 項目にセットされ、編集することができます。
 
-Add some text for the `name` property.  You don't have to put anything for the `id` property, because LoopBack will automatically manage it to ensure there is always a unique ID for each model instance.
+`name` プロパティと `city` プロパティに何か文字を入力して、`id` プロパティには何も入力しないでください。LoopBackは、モデルの各インスタンスが常に一意のIDを持つように、自動的に管理します。
 
 ```js
 {
-  "name": "My Coffee Shop",
-  "id": 0
+  "name": "Verve Coffee",
+  "city": "Santa Cruz"
 }
 ```
 
-Then click the **Try it out!** button.
+そうしたら、**Try it out!** ボタンをクリックします。
 
-You'll see information on the REST request submitted and the application's response (for example):
+REST リクエストが送信されて、アプリケーションの応答が表示されるでしょう（以下は例です）。
 
 {% include image.html file="5570642.png" alt="" %}
 
-The **Response Body** field will show the data that you just entered, returned as confirmation that it was added to the data source.
+**Response Body** 項目には、入力したデータが、実際にデータソースに追加された内容を確認するために表示されています。
 
-Now click on **GET  /CoffeeShops** to expand that endpoint.  Click **Try it out!** to retrieve the data you entered for the CoffeeShop model.  You should see the record you created using the POST API.
+今度は、**GET /CoffeeShops** をクリックして、エンドポイントを展開します。**Try it out!** をクリックして、CoffeeShop モデルに登録したデータを取得します。
+POST APIで作成したレコードが表示されます。
 
-If you are so inclined, try some other requests: You can enter more complicated [queries](Querying-data) 
-using the **filter** field to specify a [Where filter](Where-filter), 
-[Limit filter](Limit-filter), and other kinds of filters on the query. 
-See [Querying data](Querying-data) for more information.
+気が向いたら、他のリクエストも試してみましょう。**filter** 項目を使って、
+[Where フィルタ](Where-filter)・[Limit filter](Limit-filter)・その他のフィルタを追加して、より複雑な [検索](Querying-data)を行うこともできます。
+詳細は [データの検索](Querying-data) を参照してください。
 
 {% include tip.html content="
-API Explorer automatically adds \"filter\" to the query string, but you must enter [Stringified JSON](Querying-data.html#using-stringified-json-in-rest-queries) in the **filter** field. Also make sure that the quotes you use are proper straight quotes ( \" ), not curved or typographic quotation marks ( “ or ” ). These can often be hard to distinguish visually.
+API Explorer は自動的に \"filter\" をクエリ文字列に追加しますが、**filter** 項目には
+[文字列化したJSON](Querying-data.html#using-stringified-json-in-rest-queries)を入力しなければなりません。また、引用符が正しい( \" )ことを確認してください。
+丸くなっていたり、装飾的な引用符( “ or ” )では正しく動きません。見た目でこれらを区別するのはしばしば困難です。
 " %}
 
-You may have noticed the **accessToken** field and **Set Access Token** button at the top right of the API Explorer window. Use these to authenticate a user and "login" to an app so you can perform actions that require authentication. For more information, see [Introduction to User model authentication](Introduction-to-User-model-authentication).
+既に、API Explorer の右上にある **accessToken** 項目と **Set Access Token** ボタンにお気づきかもしれません。これらは、ユーザを認証し、
+アプリケーションに「ログイン」できるようにして、認証が必要な操作を行えるようにするものです。
+詳細は、[User モデル認証の導入](Introduction-to-User-model-authentication) を参照してください。
 
-{% include next.html content="In [Connect your API to a data source](Connect-your-API-to-a-data-source.html), you'll learn how to persist your data model to a database such as MongoDB."
+{% include next.html content="[APIをデータソースに接続する](Connect-your-API-to-a-data-source.html)では、データモデルを MongoDB のようなデータベースに永続化する方法を学びます。"
 %}
