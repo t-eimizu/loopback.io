@@ -157,6 +157,10 @@ children:
   translated: true
   children:
 
+  - title: '01-31-2018'
+    url: Security-advisory-01-31-2018.html
+    output: 'web, pdf'
+
   - title: '10-24-2017'
     url: Security-advisory-10-24-2017.html
     output: 'web, pdf'
