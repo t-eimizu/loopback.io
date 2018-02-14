@@ -1,30 +1,30 @@
 
-There's so much more to learn about LoopBack!  
+LoopBackについて学ぶことはもっとたくさんあります！
 
-LoopBack documentation includes lots of [tutorials and examples](Tutorials-and-examples); also read the [StrongLoop blog](http://strongloop.com/strongblog) for great tips and information.
+LoopBack の文書には沢山の[チュートリアルとサンプル](Tutorials-and-examples)が含まれています。また、[StrongLoop ブログ](http://strongloop.com/strongblog)にも凄い技や情報があります。
 
-Learn more about:
+以下のようなことを学びましょう。
 
-*   **[Creating an application](Creating-an-application)**
+*   **[アプリケーションの作成](Creating-an-application)**
 *   **[Managing users](Managing-users)**
     *   [Registering users](Registering-users)
     *   [Logging in users](Logging-in-users)
     *   [Partitioning users with realms](Partitioning-users-with-realms)
-*   **[Authentication, authorization, and permissions](Authentication-authorization-and-permissions.html)**
+*   **[認証・認可・パーミッション](Authentication-authorization-and-permissions.html)**
 *   **[Defining models](Defining-models)**
     *   [Creating models](Creating-models)
-    *   [Customizing models](Customizing-models)
+    *   [モデルのカスタマイズ](Customizing-models)
     *   [Attaching models to data sources](Attaching-models-to-data-sources)
     *   [Exposing models over REST](Exposing-models-over-REST)
     *   [Validating model data](Validating-model-data)
     *   [Creating model relations](Creating-model-relations)
-*   **[Working with data](Working-with-data)**
-*   **[Adding application logic](Adding-application-logic)**
-    *   [Adding logic to models](Adding-logic-to-models)
-    *   [Defining boot scripts](Defining-boot-scripts)
+*   **[データの操作](Working-with-data)**
+*   **[アプリケーションロジックの追加](Adding-application-logic)**
+    *   [モデルにロジックを追加する](Adding-logic-to-models)
+    *   [起動スクリプトの定義](Defining-boot-scripts)
     *   [Defining mixins](Defining-mixins)
     *   [Defining middleware](Defining-middleware)
-    *   [Working with LoopBack objects](Working-with-LoopBack-objects)
+    *   [LoopBackのオブジェクトを扱う](Working-with-LoopBack-objects)
     *   [Using current context](Using-current-context)
     *   [Events](Events)
 
@@ -35,5 +35,6 @@ Learn more about:
     *   [Angular 2 SDK](Angular-2-SDK)
 
 {% include note.html content="
-**Check out the [LoopBack Developer Forum](https://groups.google.com/forum/#!forum/loopbackjs) on Google Groups**, a place where devlopers can ask questions, discuss LoopBack, and how they are using it.
+**Google グループの [LoopBack Developer Forum](https://groups.google.com/forum/#!forum/loopbackjs) を見てください**。
+開発者がLoopBackの使い方について質問したり、議論したりできる場所です。
 " %}

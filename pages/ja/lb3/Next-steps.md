@@ -1,5 +1,5 @@
 ---
-title: "Next steps"
+title: "次のステップ"
 lang: ja
 layout: page
 toc: false
@@ -10,17 +10,18 @@ permalink: /doc/ja/lb3/Next-steps.html
 summary:
 ---
 
-## Getting Started part II
+## はじめに・パート２
 
-If you want to continue on the tutorial track, continue on to [Getting started part II](Getting-started-part-II.html).  It covers:
+チュートリアルを続ける場合は、[はじめに・パート２](Getting-started-part-II.html) に続きます。
+ここでは、以下のことを扱います。
 
-*   Using multiple data sources in an single application.
-*   Relations between models.
-*   Remote hooks.
-*   Using access control lists to protect REST endpoints.
-*   User registration and authentication
-*   Using the AngularJS SDK
+*   一つのアプリケーションで複数のデータソースを使う方法
+*   モデル同士のリレーション
+*   リモートフック
+*   REST エンドポイントを保護するためにアクセス制御リストを使う方法
+*   ユーザ登録と認証
+*   AngularJS AS の使い方
 
-## Learn more
+## さらに学習する
 
-{% include content/references.md %}
+{% include content/ja/references.md %}

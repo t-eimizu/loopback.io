@@ -1,5 +1,5 @@
 ---
-title: "Connect your API to a data source"
+title: "APIをデータソースに接続する"
 lang: ja
 layout: page
 toc: false
@@ -7,20 +7,20 @@ keywords: LoopBack
 tags: [getting_started]
 sidebar: ja_lb3_sidebar
 permalink: /doc/ja/lb3/Connect-your-API-to-a-data-source.html
-summary: LoopBack enables you to easily persist your data model to a variety of data sources without having to write code.
+summary: LoopBackでは、データモデルを様々なデータソースに永続化することが、コードを書くことなしに簡単に行なえます。
 ---
 
 {% include content/ja/gs-prereqs.html %}
 
-You're going to take the app from the previous section and connect it to MySQL.   
+前のセクションから持ってきたアプリケーションを、MySQLに接続します。
 
 {% include note.html content="
-If you followed the previous steps in the tutorial, go to [Add a data source](#add-a-data-source).
+チュートリアルのここまでのステップを済ませているなら、[データソースの追加](#add-a-data-source)に進みます。
 
-If you're just jumping in, follow the steps below to catch up...
+直接ここに来た場合、以下のステップを実行して追いついてください。
 " %}
 
-Get the app (in the state following the last article) from GitHub and install all its dependencies:
+（前の項目が終わった状態の）アプリケーションをGitHubから取得し、依存関係をインストールします。
 
 ```
 $ git clone https://github.com/strongloop/loopback-getting-started.git
@@ -29,54 +29,54 @@ $ git checkout step1
 $ npm install
 ```
 
-## Add a data source
+## データソースの追加
 
-Now you're going to define a data source using the [Data source generator](Data-source-generator):
+それでは、[データソース生成ツール](Data-source-generator)を使って、データソースを定義していきます。
 
 ```
 $ lb datasource
 ```
 
-The generator will prompt you to name the data source:
+生成ツールは、データソースの名前を尋ねます。
 
 ```
-[?] Enter the data-source name:
+? データ・ソース名を入力してください:
 ```
 
-Enter **mysqlDs** and hit **Enter**.
+**mysqlDs** と入力して、**Enter** を押下します。
 
-Next, the generator will prompt you for the type of data source:
+次に、データソースの種類を聞かれます。
 
 ```
-? Select the connector for mysqlDs: (Use arrow keys)
-❯ In-memory db (supported by StrongLoop)
-  IBM DB2 (supported by StrongLoop)
-  IBM DashDB (supported by StrongLoop)
-  IBM MQ Light (supported by StrongLoop)
-  IBM Cloudant DB (supported by StrongLoop)
-  IBM DB2 for z/OS (supported by StrongLoop)
-  MongoDB (supported by StrongLoop)
+? mysqlDs のコネクターを選択します: (Use arrow keys)
+> In-memory db (StrongLoop でサポートされます)
+  In-memory key-value connector (StrongLoop でサポートされます)
+  IBM Object Storage (StrongLoop でサポートされます)
+  IBM DB2 (StrongLoop でサポートされます)
+  IBM DashDB (StrongLoop でサポートされます)
+  IBM MQ Light (StrongLoop でサポートされます)
+  IBM Cloudant DB (StrongLoop でサポートされます)
 (Move up and down to reveal more choices)
 ```
 
-Press the down-arrow key to highlight **MySQL (supported by StrongLoop)**, then hit **Enter**.  
+下矢印キーを押下して、**MySQL (StrongLoop でサポートされます)** を選び、**Enter** を押下します。
 
-Then the tool will prompt you for the data source configuration settings.
-For MySQL, you can either enter all the settings in URL format, or individually.
+すると、データソースの接続設定を尋ねてきます。
+MySQLの場合、すべての設定をURL形式で入力することも、個別に入力することもできます。
 
 ```
 Connector-specific configuration:
 ? Connection String url to override other settings (eg: mysql://user:pass@host/db):
 ```
-Press **Enter** to skip the URL connection string, since you'll enter the settings individually.
+**Enter** を押下して、URL接続文字列をスキップし、個別に設定を入力します。
 
-{% include important.html content="If you have a MySQL database server that you can use, please use it. Create a new database called \"getting_started.\" If you wish, you can use a different database name. Just make sure the `mysqlDs.database` property in `datasources.json `matches it (see below).
+{% include important.html content="もし、利用可能なMySQLデータベースサーバを持っている場合、そちらを使ってください。\"getting_started\" という名前で新しいデータベースを作ります。別の名前が良ければ違う名前でも構いません。`datasources.json` の `mysqlDs.database` プロパティとそれが一致するようにしてください（下参照）。
 
-If not, you can use the StrongLoop MySQL server running on `demo.strongloop.com`. However, be aware that it is a shared resource. There is a small chance that two users may run the script that creates sample data (see [Add some test data and view it](#add-some-test-data-and-view-it), below) at the same time and may run into race condition. For this reason, we recommend you use your own MySQL server if you have one.
+もしそうでない場合、`demo.strongloop.com` で稼働している StrongLoop MySQL サーバを利用できます。しかし、これは共有のリソースであることに注意してください。二人のユーザが同時にサンプルデータを作成するスクリプトを実行して、競合状態に陥る可能性が、少ないですがあります。この理由から、もしMySQLを持っていれば、そちらを使うようにお勧めしています。
 " %}
 
-To use the StrongLoop MySQL server enter the settings shown below.
-To use your own MySQL server, enter the hostname, port number, and login credentials for your server. 
+StrongLoop MySQL サーバを使う場合、以下のように設定を入力します。
+自分のMySQLサーバを使う場合、あなたのサーバに合ったホスト名・ポート番号・ログイン資格情報を入力します。
 
 ```
 ? host: demo.strongloop.com
@@ -87,7 +87,8 @@ To use your own MySQL server, enter the hostname, port number, and login credent
 ? Install loopback-connector-mysql@^2.2 Yes
 ```
 
-When the tool prompts you to install the connector, hit **Enter** to make the tool run `npm install loopback-connector-mysql --save`.  The tool will also add the data source definition to the `server/datasources.json` file, which will look as shown below.  Notice the "mysqlDs" data source you just added, as well as in-memory data source named "db," which is there by default.
+コネクタのインストールを聞かれた時、**Enter** を押下して、生成ツールに `npm install loopback-connector-mysql --save` を実行させます。
+また、`server/datasources.json` ファイルに、以下のようなデータソース定義が追加されます。「mysqlDs」が追加したデータソースで、「db」というインメモリデータソースも、同様に既定で存在しています。
 
 {% include code-caption.html content="/server/datasources.json" %}
 ```javascript
@@ -109,9 +110,11 @@ When the tool prompts you to install the connector, hit **Enter** to make the to
 }
 ```
 
-## Connect CoffeeShop model to MySQL
+## CoffeeShop モデルを MySQL に接続する
 
-Now you've created a MySQL data source and you have a CoffeeShop model; you just need to connect them.  LoopBack applications use the [model-config.json](model-config.json) file to link models to data sources.  Edit `/server/model-config.json` and look for the CoffeeShop entry:
+MySQLデータソースを作成し終わり、CoffeeShopモデルがあります。あとはこれらを接続するだけです。
+LoopBackアプリケーションは、モデルとデータソースを紐付けるのに、[model-config.json](model-config.json) ファイルを使います。
+`/server/model-config.json` を開き、CoffeeShop エントリを探します。
 
 {% include code-caption.html content="/server/model-config.json" %}
 ```javascript
@@ -123,7 +126,7 @@ Now you've created a MySQL data source and you have a CoffeeShop model; you just
   ...
 ```
 
-Change the `dataSource` property from `db` to `mysqlDs`.  This attaches the CoffeeShop model to the MySQL datasource you just created and configured:
+`dataSource` プロパティを `db` から `mysqlDs` に変更します。これで、CoffeeShopモデルが、作ったばかりのMySQLデータソースに紐付けられます。
 
 {% include code-caption.html content="/server/model-config.json" %}
 ```javascript
@@ -135,15 +138,18 @@ Change the `dataSource` property from `db` to `mysqlDs`.  This attaches th
   ...
 ```
 
-## Add some test data and view it
+## テストデータの追加と表示
 
-Now you have a CoffeeShop model in LoopBack, how do you  create the corresponding table in MySQL database?
+CoffeeShop モデルが 既にLoopBackにあります。どうやってMySQLデータベースに対応するテーブルを作成しますか？
 
-You could try executing some SQL statements directly...but LoopBack provides a Node API to do it for you automatically using a process called _auto-migration_.  For more information, see [Creating a database schema from models](Creating-a-database-schema-from-models).
+SQL文を直接実行しようとすることもできますが、LoopBackは、_auto-migration_ と呼ばれる、それを自動的に行うNode APIを提供しています。
+詳細は、[モデルからデータベーススキーマを作る](Creating-a-database-schema-from-models) を参照してください。
 
-The `loopback-getting-started` module contains the `create-sample-models.js` script to demonstrate auto-migration.  If you've been following along from the beginning (and didn't just clone this module), then you'll need to copy it from below or [from GitHub](https://github.com/strongloop/loopback-getting-started/blob/master/server/boot/create-sample-models.js) .  Put it in the application's `/server/boot` directory so it will get executed when the application starts.
+`loopback-getting-started` モジュールは、auto-migration のデモを行う `create-sample-models.js` スクリプトを含んでいます。
+もし、初めから進めてきた（そして、このモジュールを複製していない）場合、下か [GitHub から](https://github.com/strongloop/loopback-getting-started/blob/master/server/boot/create-sample-models.js) コピーする必要があります。
+アプリケーションの `/server/boot` ディレクトリにスクリプトを配置すると、アプリケーションの開始時に実行されます。
 
-{% include note.html content="The auto-migration script below is an example of a _boot script_ that LoopBack executes when an application initially starts up. Use boot scripts for initialization and to perform any other logic your application needs to perform when it starts. See [Defining boot scripts](Defining-boot-scripts) for more information.
+{% include note.html content="以下の auto-migration スクリプトは、LoopBackがアプリケーションを起動する時に最初に実行する _起動スクリプト_ の例です。アプリケーションが開始時に行う必要がある初期化やその他のロジックのために、起動スクリプトを使います。詳しくは[起動スクリプトの定義](Defining-boot-scripts) を参照してください。
 " %}
 
 {% include code-caption.html content="/server/boot/create-sample-models.js" %}
@@ -170,18 +176,18 @@ module.exports = function(app) {
 };
 ```
 
-This will save some test data to the data source.
+これは、データソースにテストデータを保存します。
 
-{% include note.html content="The boot script containing the auto-migration command will run _each time_ you run your application. Since [`automigrate()`](http://apidocs.loopback.io/loopback-datasource-juggler/#datasource-prototype-automigrate) first drops tables before trying to create new ones, it won't create duplicate tables.
+{% include note.html content="auto-migrationコマンドを含む起動スクリプトは、アプリケーションを起動するたび、_毎回_ 実行されます。[`automigrate()`](http://apidocs.loopback.io/loopback-datasource-juggler/#datasource-prototype-automigrate) は、テーブルを重複して作成しないように、最初にテーブルを削除します。
 " %}
 
-Now run the application:
+アプリケーションを実行します。
 
 ```
 $ node .
 ```
 
-In the console, you'll see this:
+コンソールには、以下のように表示されます。
 
 ```
 ...
@@ -198,13 +204,13 @@ Models created: [ { name: 'Bel Cafe',
     id: 2 } ]
 ```
 
-You can also use the API Explorer:
+API Explorer も使えます。
 
-1.  Browse to [http://0.0.0.0:3000/explorer/](http://0.0.0.0:3000/explorer/) (you may need to use [http://localhost:3000/explorer,](http://localhost:3000/explorer,) depending on your browser and OS).
-2.  Click **GET  /CoffeeShops  Find all instance of the model matched by filter...**
-3.  Click **Try it out!**
-4.  You'll see the data for the three coffee shops created in the above script. 
+1.  [http://0.0.0.0:3000/explorer/](http://0.0.0.0:3000/explorer/) (OSやブラウザによっては、[http://localhost:3000/explorer,](http://localhost:3000/explorer) を使う必要があります) を開きます。
+2.  **GET  /CoffeeShops  Find all instance of the model matched by filter...** をクリックします。
+3.  **Try it out!** をクリックします。
+4.  上のスクリプトで作成された３つのコーヒーショップのデータが表示されます。
 
 {% include next.html content= "
-In [Extend your API](Extend-your-API.html), you'll learn how to add a custom method to your model.
+[API を拡張する](Extend-your-API.html)では、モデルに独自のメソッドを追加する方法を学習します。
 " %}
